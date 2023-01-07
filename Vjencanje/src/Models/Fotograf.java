@@ -1,14 +1,20 @@
 package Models;
 
 public class Fotograf {
+    private int id;
     private String ime;
     private String prezime;
     private float cijena;
 
-    public Fotograf (String ime, String prezime, float cijena) {
+    public Fotograf (int id, String ime, String prezime, float cijena) {
+        this.id = id;
         this.ime = ime;
         this.prezime = prezime;
         this.cijena = cijena;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public float getCijena() {
@@ -37,6 +43,6 @@ public class Fotograf {
 
     @Override
     public String toString() {
-        return "Fotograf " + ime + " " + prezime + ", cijena: " + cijena;
+        return "Fotograf (id: " + id + ") " + ime + " " + prezime + ", cijena: " + cijena;
     }
 }

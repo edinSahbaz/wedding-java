@@ -1,14 +1,20 @@
 package Models;
 
 public class Maticar {
+    private int id;
     private String ime;
     private String prezime;
     private int brojLicence;
 
-    public Maticar(String ime, String prezime, int brojLicence) {
+    public Maticar(int id, String ime, String prezime, int brojLicence) {
+        this.id = id;
         this.ime = ime;
         this.prezime = prezime;
         this.brojLicence = brojLicence;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public int getBrojLicence() {
@@ -37,6 +43,6 @@ public class Maticar {
 
     @Override
     public String toString() {
-        return "Maticar " + ime + " " + prezime + ", broj licence: " + brojLicence;
+        return "Maticar (id: " + id + ") " + ime + " " + prezime + ", broj licence: " + brojLicence;
     }
 }
