@@ -1,20 +1,11 @@
 package Models;
 
-public class Maticar {
-    private int id;
-    private String ime;
-    private String prezime;
+public class Maticar extends Osoblje {
     private int brojLicence;
 
     public Maticar(int id, String ime, String prezime, int brojLicence) {
-        this.id = id;
-        this.ime = ime;
-        this.prezime = prezime;
+        super(id, ime, prezime);
         this.brojLicence = brojLicence;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public int getBrojLicence() {
@@ -25,24 +16,8 @@ public class Maticar {
         this.brojLicence = brojLicence;
     }
 
-    public String getIme() {
-        return ime;
-    }
-
-    public void setIme(String ime) {
-        this.ime = ime;
-    }
-
-    public String getPrezime() {
-        return prezime;
-    }
-
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
-    }
-
     @Override
     public String toString() {
-        return "Maticar (id: " + id + ") " + ime + " " + prezime + ", broj licence: " + brojLicence;
+        return super.toString() + ", broj licence: " + brojLicence;
     }
 }
