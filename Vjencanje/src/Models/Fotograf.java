@@ -1,6 +1,6 @@
 package Models;
 
-public class Fotograf extends Osoblje {
+public class Fotograf extends Ucesnik {
     private float cijena;
 
     public Fotograf (int id, String ime, String prezime, float cijena) {

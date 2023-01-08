@@ -20,4 +20,9 @@ public class Usluga {
     public void setVrsta(String vrsta) {
         this.vrsta = vrsta;
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + " (id: " + id + "): " + vrsta;
+    }
 }

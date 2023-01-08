@@ -1,6 +1,6 @@
 package Models;
 
-public class Maticar extends Osoblje {
+public class Maticar extends Ucesnik {
     private int brojLicence;
 
     public Maticar(int id, String ime, String prezime, int brojLicence) {
