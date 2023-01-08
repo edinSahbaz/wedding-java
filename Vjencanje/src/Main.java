@@ -1,3 +1,4 @@
+import Helpers.DateHelper;
 import Models.*;
 
 import java.util.Date;
@@ -24,7 +25,8 @@ public class Main {
         Osoba o4 = new Osoba(4, "Ime4", "Prezime4", gost);
         Osoba o5 = new Osoba(5, "Ime5", "Prezime5", gost);
 
-        Date termin = new Date();
+
+        Date termin = DateHelper.getDateFromString("10/10/2022");
 
         Vjencanje v = new Vjencanje(1, termin, l, m, f, c);
         v.addOsoba(o1);
