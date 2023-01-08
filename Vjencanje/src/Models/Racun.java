@@ -50,9 +50,11 @@ public class Racun {
 
     @Override
     public String toString() {
-        String dateOutput = DateHelper.getDateInFormat(vjencanje.getTermin(), "dd.MM.yyyy hh:mm");
+        String datumVjencanja = DateHelper.getDateInFormat(vjencanje.getTermin(), "dd.MM.yyyy hh:mm");
+        String datumRacuna = DateHelper.getDateInFormat(vjencanje.getTermin(), "dd.MM.yyyy hh:mm");
 
         return "Iznos racuna za vjencanje "
-                + vjencanje.getLokacija().getSala().getAdresa() + ", " + dateOutput + ": " + iznos + "KM";
+                + vjencanje.getLokacija().getSala().getAdresa() + ", " + datumVjencanja + ": " + iznos + "KM"
+                + "\nDatum i vrijeme izdavanja racuna: " + datumRacuna;
     }
 }
