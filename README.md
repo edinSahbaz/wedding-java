@@ -1,2 +1,2 @@
 # wedding-java
-Simple Java task for my Software Engineering 2 class.
+Java task for university course Software Engineering 2.
