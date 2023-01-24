@@ -25,7 +25,7 @@ public class HranaTable {
         hranaTable.remove(id);
     }
 
-    public LinkedHashMap selectAll () {
+    public LinkedHashMap<Integer, Hrana> selectAll () {
         return hranaTable;
     }
 

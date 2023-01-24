@@ -1,6 +1,7 @@
 package Views;
 
 import Data.VjencanjeData;
+import Models.Pice;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,6 +61,8 @@ public class HomeView {
         panelsMap.put("Hrana", new HranaPanel(vjencanjeData).getPanel());
 
         buttonsMap.put("Pice", openPiceBtn);
+        panelsMap.put("Pice", new PicePanel(vjencanjeData).getPanel());
+
         buttonsMap.put("Catering", openCateringBtn);
         buttonsMap.put("Paket", openPaketBtn);
         buttonsMap.put("Fotograf", openFotografBtn);

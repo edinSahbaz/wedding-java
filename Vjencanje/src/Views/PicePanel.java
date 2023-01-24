@@ -1,15 +1,17 @@
 package Views;
 
 import Data.Tables.HranaTable;
+import Data.Tables.PiceTable;
 import Data.VjencanjeData;
 import Models.Hrana;
+import Models.Pice;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedHashMap;
 
-public class HranaPanel extends SuperPanel {
-    private HranaTable hranaTable;
+public class PicePanel extends SuperPanel {
+    private PiceTable piceTable;
     private JTextField nameTxtFiled = new JTextField();
     private JButton addBtn = new JButton();
     private JButton showAllBtn = new JButton();
@@ -19,9 +21,9 @@ public class HranaPanel extends SuperPanel {
     private JButton getByIdBtn = new JButton();
 
 
-    public HranaPanel(VjencanjeData vjencanjeData) {
-        super("Hrana");
-        this.hranaTable = vjencanjeData.getHranaTable();
+    public PicePanel(VjencanjeData vjencanjeData) {
+        super("Pice");
+        this.piceTable = vjencanjeData.getPiceTable();
 
         configureNameInput();
         configureAddBtn();
@@ -47,16 +49,16 @@ public class HranaPanel extends SuperPanel {
     }
 
     private void configureAddBtn() {
-        addBtn.setText("Dodaj Hranu");
+        addBtn.setText("Dodaj Pice");
         addBtn.addActionListener(e -> {
             String name = nameTxtFiled.getText();
 
             if(name.length() < 1) {
-                JOptionPane.showMessageDialog(panel, "Unesite naziv paketa hrane!");
+                JOptionPane.showMessageDialog(panel, "Unesite naziv paketa pica!");
             } else {
-                int id = hranaTable.getNewId();
-                Hrana newHrana = new Hrana(id, name);
-                hranaTable.insert(newHrana);
+                int id = piceTable.getNewId();
+                Pice newPice = new Pice(id, name);
+                piceTable.insert(newPice);
             }
         });
 
@@ -64,14 +66,14 @@ public class HranaPanel extends SuperPanel {
     }
 
     private void configureShowBtn() {
-        showAllBtn.setText("Prikazi Hranu");
+        showAllBtn.setText("Prikazi Pice");
         showAllBtn.addActionListener(e -> {
-            LinkedHashMap<Integer, Hrana> returnData = hranaTable.selectAll();
+            LinkedHashMap<Integer, Pice> returnData = piceTable.selectAll();
 
             String output = "";
 
             for (int id : returnData.keySet()) {
-                Hrana temp = returnData.get(id);
+                Pice temp = returnData.get(id);
                 output += temp.toString() + "\n";
             }
 
@@ -82,14 +84,14 @@ public class HranaPanel extends SuperPanel {
     }
 
     private void configureDeleteBtn() {
-        deleteBtn.setText("Obrisi Hranu za uneseni ID");
+        deleteBtn.setText("Obrisi Pice za uneseni ID");
         deleteBtn.addActionListener(e -> {
             int id = Integer.parseInt(idTxtFiled.getText());
 
-            if(hranaTable.selectById(id) == null) {
+            if(piceTable.selectById(id) == null) {
                 JOptionPane.showMessageDialog(panel, "Zapis ne postoji!");
             } else {
-                hranaTable.delete(id);
+                piceTable.delete(id);
             }
         });
 
@@ -97,16 +99,16 @@ public class HranaPanel extends SuperPanel {
     }
 
     private void configureUpdateBtn() {
-        updateBtn.setText("Update Hranu za uneseni ID");
+        updateBtn.setText("Update Pice za uneseni ID");
         updateBtn.addActionListener(e -> {
             String name = nameTxtFiled.getText();
             int id = Integer.parseInt(idTxtFiled.getText());
 
-            if(name.length() < 1 || hranaTable.selectById(id) == null) {
+            if(name.length() < 1 || piceTable.selectById(id) == null) {
                 JOptionPane.showMessageDialog(panel, "Naziv ili id pogrešni!");
             } else {
-                Hrana newHrana = new Hrana(id, name);
-                hranaTable.update(id, newHrana);
+                Pice newPice = new Pice(id, name);
+                piceTable.update(id, newPice);
             }
         });
 
@@ -114,10 +116,10 @@ public class HranaPanel extends SuperPanel {
     }
 
     private void configureGetByIdBtn() {
-        getByIdBtn.setText("Prikazi Hranu za uneseni ID");
+        getByIdBtn.setText("Prikazi Pice za uneseni ID");
         getByIdBtn.addActionListener(e -> {
             int id = Integer.parseInt(idTxtFiled.getText());
-            Hrana returnData = hranaTable.selectById(id);
+            Pice returnData = piceTable.selectById(id);
             String output = "";
 
             if(returnData == null) {
