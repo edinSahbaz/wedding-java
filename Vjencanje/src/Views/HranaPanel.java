@@ -35,12 +35,20 @@ public class HranaPanel extends SuperPanel {
     }
 
     private void configureNameInput() {
+        JLabel txtFieldLabel = new JLabel();
+        txtFieldLabel.setText("Naziv");
+        panel.add(txtFieldLabel);
+
         nameTxtFiled.setFont(new Font("Arial", Font.BOLD, 24));
         nameTxtFiled.setPreferredSize(new Dimension(400, 24));
         panel.add(nameTxtFiled);
     }
 
     private void configureIdInput() {
+        JLabel txtFieldLabel = new JLabel();
+        txtFieldLabel.setText("Id");
+        panel.add(txtFieldLabel);
+
         idTxtFiled.setFont(new Font("Arial", Font.BOLD, 24));
         idTxtFiled.setPreferredSize(new Dimension(400, 24));
         panel.add(idTxtFiled);

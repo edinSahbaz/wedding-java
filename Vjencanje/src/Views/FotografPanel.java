@@ -1,18 +1,19 @@
 package Views;
 
-import Data.Tables.HranaTable;
-import Data.Tables.PiceTable;
+import Data.Tables.FotografTable;
 import Data.VjencanjeData;
+import Models.Fotograf;
 import Models.Hrana;
-import Models.Pice;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedHashMap;
 
-public class PicePanel extends SuperPanel {
-    private PiceTable piceTable;
+public class FotografPanel extends SuperPanel {
+    private FotografTable fotografTable;
     private JTextField nameTxtFiled = new JTextField();
+    private JTextField surnameTxtFiled = new JTextField();
+    private JTextField priceTxtFiled = new JTextField();
     private JButton addBtn = new JButton();
     private JButton showAllBtn = new JButton();
     private JTextField idTxtFiled = new JTextField();
@@ -20,53 +21,46 @@ public class PicePanel extends SuperPanel {
     private JButton deleteBtn = new JButton();
     private JButton getByIdBtn = new JButton();
 
+    public FotografPanel(VjencanjeData vjencanjeData) {
+        super("Fotograf");
+        this.fotografTable = vjencanjeData.getFotografTable();
 
-    public PicePanel(VjencanjeData vjencanjeData) {
-        super("Pice");
-        this.piceTable = vjencanjeData.getPiceTable();
-
-        configureNameInput();
+        configureInput(nameTxtFiled, "Ime");
+        configureInput(surnameTxtFiled, "Prezime");
+        configureInput(priceTxtFiled, "Cijena");
         configureAddBtn();
         panel.add(new JSeparator());
         configureShowBtn();
         panel.add(new JSeparator());
-        configureIdInput();
+        configureInput(idTxtFiled, "Id");
         configureGetByIdBtn();
         configureUpdateBtn();
         configureDeleteBtn();
     }
 
-    private void configureNameInput() {
+    private void configureInput(JTextField textField, String label) {
         JLabel txtFieldLabel = new JLabel();
-        txtFieldLabel.setText("Naziv");
+        txtFieldLabel.setText(label);
         panel.add(txtFieldLabel);
 
-        nameTxtFiled.setFont(new Font("Arial", Font.BOLD, 24));
-        nameTxtFiled.setPreferredSize(new Dimension(400, 24));
-        panel.add(nameTxtFiled);
-    }
-
-    private void configureIdInput() {
-        JLabel txtFieldLabel = new JLabel();
-        txtFieldLabel.setText("Id");
-        panel.add(txtFieldLabel);
-
-        idTxtFiled.setFont(new Font("Arial", Font.BOLD, 24));
-        idTxtFiled.setPreferredSize(new Dimension(400, 24));
-        panel.add(idTxtFiled);
+        textField.setFont(new Font("Arial", Font.BOLD, 24));
+        textField.setPreferredSize(new Dimension(400, 24));
+        panel.add(textField);
     }
 
     private void configureAddBtn() {
-        addBtn.setText("Dodaj Pice");
+        addBtn.setText("Dodaj Fotografa");
         addBtn.addActionListener(e -> {
             String name = nameTxtFiled.getText();
+            String surname = surnameTxtFiled.getText();
+            float price = Float.parseFloat(priceTxtFiled.getText());
 
-            if(name.length() < 1) {
-                JOptionPane.showMessageDialog(panel, "Unesite naziv paketa pica!");
+            if(name.length() < 1 || surname.length() < 1) {
+                JOptionPane.showMessageDialog(panel, "Pogrešni parametri!");
             } else {
-                int id = piceTable.getNewId();
-                Pice newPice = new Pice(id, name);
-                piceTable.insert(newPice);
+                int id = fotografTable.getNewId();
+                Fotograf newFotograf = new Fotograf(id, name, surname, price);
+                fotografTable.insert(newFotograf);
             }
         });
 
@@ -74,14 +68,14 @@ public class PicePanel extends SuperPanel {
     }
 
     private void configureShowBtn() {
-        showAllBtn.setText("Prikazi Pice");
+        showAllBtn.setText("Prikazi Fotografe");
         showAllBtn.addActionListener(e -> {
-            LinkedHashMap<Integer, Pice> returnData = piceTable.selectAll();
+            LinkedHashMap<Integer, Fotograf> returnData = fotografTable.selectAll();
 
             String output = "";
 
             for (int id : returnData.keySet()) {
-                Pice temp = returnData.get(id);
+                Fotograf temp = returnData.get(id);
                 output += temp.toString() + "\n";
             }
 
@@ -92,14 +86,14 @@ public class PicePanel extends SuperPanel {
     }
 
     private void configureDeleteBtn() {
-        deleteBtn.setText("Obrisi Pice za uneseni ID");
+        deleteBtn.setText("Obrisi Fotografa za uneseni ID");
         deleteBtn.addActionListener(e -> {
             int id = Integer.parseInt(idTxtFiled.getText());
 
-            if(piceTable.selectById(id) == null) {
+            if(fotografTable.selectById(id) == null) {
                 JOptionPane.showMessageDialog(panel, "Zapis ne postoji!");
             } else {
-                piceTable.delete(id);
+                fotografTable.delete(id);
             }
         });
 
@@ -107,16 +101,18 @@ public class PicePanel extends SuperPanel {
     }
 
     private void configureUpdateBtn() {
-        updateBtn.setText("Update Pice za uneseni ID");
+        updateBtn.setText("Update Fotografa za uneseni ID");
         updateBtn.addActionListener(e -> {
             String name = nameTxtFiled.getText();
+            String surname = surnameTxtFiled.getText();
+            float price = Float.parseFloat(priceTxtFiled.getText());
             int id = Integer.parseInt(idTxtFiled.getText());
 
-            if(name.length() < 1 || piceTable.selectById(id) == null) {
-                JOptionPane.showMessageDialog(panel, "Naziv ili id pogrešni!");
+            if(name.length() < 1 || surname.length() < 1 || fotografTable.selectById(id) == null) {
+                JOptionPane.showMessageDialog(panel, "Pogrešan parametar!");
             } else {
-                Pice newPice = new Pice(id, name);
-                piceTable.update(id, newPice);
+                Fotograf newFotograf = new Fotograf(id, name, surname, price);
+                fotografTable.update(id, newFotograf);
             }
         });
 
@@ -124,10 +120,10 @@ public class PicePanel extends SuperPanel {
     }
 
     private void configureGetByIdBtn() {
-        getByIdBtn.setText("Prikazi Pice za uneseni ID");
+        getByIdBtn.setText("Prikazi Fotografa za uneseni ID");
         getByIdBtn.addActionListener(e -> {
             int id = Integer.parseInt(idTxtFiled.getText());
-            Pice returnData = piceTable.selectById(id);
+            Fotograf returnData = fotografTable.selectById(id);
             String output = "";
 
             if(returnData == null) {

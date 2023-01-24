@@ -62,7 +62,7 @@ public class HomeView {
         showAboutBtn.setBounds(600, 20, 100, 14);
 
         showAboutBtn.addActionListener(e -> {
-            String output = "Softversko inžinjerstvo 2\nSeminarski rad\nGrupa 1:\nEdin Šahbaz, Faris Rizvanović, Kerim Katica, Nada Čelik, Josipa Bošnjak";
+            String output = "Softversko inžinjerstvo 2\nSeminarski rad\nUradio: Edin Šahbaz";
             JOptionPane.showMessageDialog(frame, output);
         });
 
@@ -80,19 +80,36 @@ public class HomeView {
         panelsMap.put("Pice", new PicePanel(vjencanjeData).getPanel());
 
         buttonsMap.put("Catering", openCateringBtn);
+
+
         buttonsMap.put("Paket", openPaketBtn);
+
+
         buttonsMap.put("Fotograf", openFotografBtn);
+        panelsMap.put("Fotograf", new FotografPanel(vjencanjeData).getPanel());
+
         buttonsMap.put("Maticar", openMaticarBtn);
+
+
         buttonsMap.put("Tema", openTemaBtn);
+
+
         buttonsMap.put("Sala", openSalaBtn);
+
+
         buttonsMap.put("Lokacija", openLokacijaBtn);
 
         buttonsMap.put("Uloga", openUlogaBtn);
         panelsMap.put("Uloga", new UlogaPanel(vjencanjeData).getPanel());
 
         buttonsMap.put("Osoba", openOsobaBtn);
+
+
         buttonsMap.put("Vjencanje", openVjencanjeBtn);
+
+
         buttonsMap.put("Racun", openRacunBtn);
+
     }
 
     private void configureButtons() {
