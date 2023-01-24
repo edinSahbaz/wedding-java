@@ -1,7 +1,6 @@
 package Views;
 
 import Data.VjencanjeData;
-import Models.Pice;
 
 import javax.swing.*;
 import java.awt.*;
@@ -89,7 +88,7 @@ public class HomeView {
         panelsMap.put("Fotograf", new FotografPanel(vjencanjeData).getPanel());
 
         buttonsMap.put("Maticar", openMaticarBtn);
-
+        panelsMap.put("Maticar", new MaticarPanel(vjencanjeData).getPanel());
 
         buttonsMap.put("Tema", openTemaBtn);
 

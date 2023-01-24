@@ -1,38 +1,38 @@
 package Data.Tables;
 
 import Helpers.IdHelper;
-import Models.Fotograf;
+import Models.Maticar;
 
 import java.util.LinkedHashMap;
 
 public class MaticarTable {
-    private LinkedHashMap<Integer, Fotograf> fotografTable;
+    private LinkedHashMap<Integer, Maticar> maticarTable;
 
     public MaticarTable() {
-        this.fotografTable = new LinkedHashMap<>();
+        this.maticarTable = new LinkedHashMap<>();
     }
 
-    public void insert (Fotograf newData) {
-        fotografTable.put(newData.getId(), newData);
+    public void insert (Maticar newData) {
+        maticarTable.put(newData.getId(), newData);
     }
 
-    public void update (int id, Fotograf newData) {
-        fotografTable.put(id, newData);
+    public void update (int id, Maticar newData) {
+        maticarTable.put(id, newData);
     }
 
     public void delete (int id) {
-        fotografTable.remove(id);
+        maticarTable.remove(id);
     }
 
-    public LinkedHashMap<Integer, Fotograf> selectAll () {
-        return fotografTable;
+    public LinkedHashMap<Integer, Maticar> selectAll () {
+        return maticarTable;
     }
 
-    public Fotograf selectById (int id) {
-        return fotografTable.get(id);
+    public Maticar selectById (int id) {
+        return maticarTable.get(id);
     }
 
     public int getNewId() {
-        return IdHelper.getNewId(fotografTable);
+        return IdHelper.getNewId(maticarTable);
     }
 }

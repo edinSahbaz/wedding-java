@@ -1,18 +1,18 @@
 package Views;
 
-import Data.Tables.FotografTable;
+import Data.Tables.MaticarTable;
 import Data.VjencanjeData;
-import Models.Fotograf;
+import Models.Maticar;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedHashMap;
 
-public class FotografPanel extends SuperPanel {
-    private FotografTable fotografTable;
+public class MaticarPanel extends SuperPanel {
+    private MaticarTable maticarTable;
     private JTextField nameTxtFiled = new JTextField();
     private JTextField surnameTxtFiled = new JTextField();
-    private JTextField priceTxtFiled = new JTextField();
+    private JTextField licenceTxtFiled = new JTextField();
     private JButton addBtn = new JButton();
     private JButton showAllBtn = new JButton();
     private JTextField idTxtFiled = new JTextField();
@@ -20,13 +20,13 @@ public class FotografPanel extends SuperPanel {
     private JButton deleteBtn = new JButton();
     private JButton getByIdBtn = new JButton();
 
-    public FotografPanel(VjencanjeData vjencanjeData) {
-        super("Fotograf");
-        this.fotografTable = vjencanjeData.getFotografTable();
+    public MaticarPanel(VjencanjeData vjencanjeData) {
+        super("Maticar");
+        this.maticarTable = vjencanjeData.getMaticarTable();
 
         configureInput(nameTxtFiled, "Ime");
         configureInput(surnameTxtFiled, "Prezime");
-        configureInput(priceTxtFiled, "Cijena");
+        configureInput(licenceTxtFiled, "Broj licence");
         configureAddBtn();
         panel.add(new JSeparator());
         configureShowBtn();
@@ -48,18 +48,18 @@ public class FotografPanel extends SuperPanel {
     }
 
     private void configureAddBtn() {
-        addBtn.setText("Dodaj Fotografa");
+        addBtn.setText("Dodaj Maticara");
         addBtn.addActionListener(e -> {
             String name = nameTxtFiled.getText();
             String surname = surnameTxtFiled.getText();
-            float price = Float.parseFloat(priceTxtFiled.getText());
+            int licence = Integer.parseInt(licenceTxtFiled.getText());
 
             if(name.length() < 1 || surname.length() < 1) {
                 JOptionPane.showMessageDialog(panel, "Pogrešni parametri!");
             } else {
-                int id = fotografTable.getNewId();
-                Fotograf newFotograf = new Fotograf(id, name, surname, price);
-                fotografTable.insert(newFotograf);
+                int id = maticarTable.getNewId();
+                Maticar newMaticar = new Maticar(id, name, surname, licence);
+                maticarTable.insert(newMaticar);
             }
         });
 
@@ -67,14 +67,14 @@ public class FotografPanel extends SuperPanel {
     }
 
     private void configureShowBtn() {
-        showAllBtn.setText("Prikazi Fotografe");
+        showAllBtn.setText("Prikazi Maticare");
         showAllBtn.addActionListener(e -> {
-            LinkedHashMap<Integer, Fotograf> returnData = fotografTable.selectAll();
+            LinkedHashMap<Integer, Maticar> returnData = maticarTable.selectAll();
 
             String output = "";
 
             for (int id : returnData.keySet()) {
-                Fotograf temp = returnData.get(id);
+                Maticar temp = returnData.get(id);
                 output += temp.toString() + "\n";
             }
 
@@ -85,14 +85,14 @@ public class FotografPanel extends SuperPanel {
     }
 
     private void configureDeleteBtn() {
-        deleteBtn.setText("Obrisi Fotografa za uneseni ID");
+        deleteBtn.setText("Obrisi Maticara za uneseni ID");
         deleteBtn.addActionListener(e -> {
             int id = Integer.parseInt(idTxtFiled.getText());
 
-            if(fotografTable.selectById(id) == null) {
+            if(maticarTable.selectById(id) == null) {
                 JOptionPane.showMessageDialog(panel, "Zapis ne postoji!");
             } else {
-                fotografTable.delete(id);
+                maticarTable.delete(id);
             }
         });
 
@@ -100,18 +100,18 @@ public class FotografPanel extends SuperPanel {
     }
 
     private void configureUpdateBtn() {
-        updateBtn.setText("Update Fotografa za uneseni ID");
+        updateBtn.setText("Update Maticara za uneseni ID");
         updateBtn.addActionListener(e -> {
             String name = nameTxtFiled.getText();
             String surname = surnameTxtFiled.getText();
-            float price = Float.parseFloat(priceTxtFiled.getText());
+            int licence = Integer.parseInt(licenceTxtFiled.getText());
             int id = Integer.parseInt(idTxtFiled.getText());
 
-            if(name.length() < 1 || surname.length() < 1 || fotografTable.selectById(id) == null) {
+            if(name.length() < 1 || surname.length() < 1 || maticarTable.selectById(id) == null) {
                 JOptionPane.showMessageDialog(panel, "Pogrešan parametar!");
             } else {
-                Fotograf newFotograf = new Fotograf(id, name, surname, price);
-                fotografTable.update(id, newFotograf);
+                Maticar newMaticar = new Maticar(id, name, surname, licence);
+                maticarTable.update(id, newMaticar);
             }
         });
 
@@ -119,10 +119,10 @@ public class FotografPanel extends SuperPanel {
     }
 
     private void configureGetByIdBtn() {
-        getByIdBtn.setText("Prikazi Fotografa za uneseni ID");
+        getByIdBtn.setText("Prikazi Maticara za uneseni ID");
         getByIdBtn.addActionListener(e -> {
             int id = Integer.parseInt(idTxtFiled.getText());
-            Fotograf returnData = fotografTable.selectById(id);
+            Maticar returnData = maticarTable.selectById(id);
             String output = "";
 
             if(returnData == null) {
