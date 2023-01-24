@@ -23,6 +23,6 @@ public class Uloga {
 
     @Override
     public String toString() {
-        return "Uloga (id: " + id + "): " + naziv;
+        return "UlogaTable (id: " + id + "): " + naziv;
     }
 }

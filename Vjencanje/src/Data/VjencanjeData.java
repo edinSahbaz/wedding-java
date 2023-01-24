@@ -2,17 +2,17 @@ package Data;
 
 import Data.Tables.HranaTable;
 import Data.Tables.PiceTable;
-import Models.Hrana;
-
-import java.util.ArrayList;
+import Data.Tables.UlogaTable;
 
 public class VjencanjeData {
     private HranaTable hranaTable;
     private PiceTable piceTable;
+    private UlogaTable ulogaTable;
 
     public VjencanjeData() {
         this.hranaTable = new HranaTable();
         this.piceTable = new PiceTable();
+        this.ulogaTable = new UlogaTable();
     }
 
     public HranaTable getHranaTable() {
@@ -21,5 +21,9 @@ public class VjencanjeData {
 
     public PiceTable getPiceTable() {
         return piceTable;
+    }
+
+    public UlogaTable getUlogaTable() {
+        return ulogaTable;
     }
 }

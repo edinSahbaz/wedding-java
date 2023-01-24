@@ -29,6 +29,8 @@ public class HomeView {
     private JButton openRacunBtn = new JButton();
     LinkedHashMap<String, JButton> buttonsMap;
     HashMap<String, JPanel> panelsMap;
+    private JButton showAboutBtn = new JButton();
+
 
     public HomeView() {
         vjencanjeData = new VjencanjeData();
@@ -39,6 +41,7 @@ public class HomeView {
         frame.setResizable(false);
 
         setTitle();
+        configureAboutBtn();
         populateMaps();
         configureButtons();
 
@@ -51,6 +54,19 @@ public class HomeView {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setBounds(300, 10, 200, 30);
         frame.add(titleLabel);
+    }
+
+    private void configureAboutBtn() {
+        showAboutBtn.setText("About");
+        showAboutBtn.setFont(new Font("Arial", Font.PLAIN, 12));
+        showAboutBtn.setBounds(600, 20, 100, 14);
+
+        showAboutBtn.addActionListener(e -> {
+            String output = "Softversko inžinjerstvo 2\nSeminarski rad\nGrupa 1:\nEdin Šahbaz, Faris Rizvanović, Kerim Katica, Nada Čelik, Josipa Bošnjak";
+            JOptionPane.showMessageDialog(frame, output);
+        });
+
+        frame.add(showAboutBtn);
     }
 
     private void populateMaps() {
@@ -70,7 +86,10 @@ public class HomeView {
         buttonsMap.put("Tema", openTemaBtn);
         buttonsMap.put("Sala", openSalaBtn);
         buttonsMap.put("Lokacija", openLokacijaBtn);
+
         buttonsMap.put("Uloga", openUlogaBtn);
+        panelsMap.put("Uloga", new UlogaPanel(vjencanjeData).getPanel());
+
         buttonsMap.put("Osoba", openOsobaBtn);
         buttonsMap.put("Vjencanje", openVjencanjeBtn);
         buttonsMap.put("Racun", openRacunBtn);

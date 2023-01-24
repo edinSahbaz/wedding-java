@@ -1,10 +1,9 @@
 package Data.Tables;
 
+import Helpers.IdHelper;
 import Models.Hrana;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 public class HranaTable {
     private LinkedHashMap<Integer, Hrana> hranaTable;
@@ -34,16 +33,6 @@ public class HranaTable {
     }
 
     public int getNewId() {
-        int size = hranaTable.size();
-
-        // Mimics IDENTITY from MSSQL
-        if(size == 0) {
-            return 1;
-        } else {
-            List<Integer> keys = new ArrayList<>(hranaTable.keySet());
-            int id = keys.get(keys.size() - 1) + 1;
-            return id;
-        }
-
+        return IdHelper.getNewId(hranaTable);
     }
 }
