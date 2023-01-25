@@ -1,6 +1,6 @@
 package Models;
 
-public class Usluga {
+public abstract class Usluga implements IDataModel {
     protected int id;
     protected String vrsta;
 

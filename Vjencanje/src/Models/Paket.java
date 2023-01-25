@@ -1,6 +1,6 @@
 package Models;
 
-public class Paket {
+public class Paket implements IDataModel {
     private int id;
     private String nazivPaketa;
     private float cijenaPoOsobi;

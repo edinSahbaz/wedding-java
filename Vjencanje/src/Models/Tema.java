@@ -1,6 +1,6 @@
 package Models;
 
-public class Tema {
+public class Tema implements IDataModel {
     private int id;
     private String naziv;
     private float cijenaPoMjestu;

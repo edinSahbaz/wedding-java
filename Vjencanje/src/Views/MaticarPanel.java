@@ -37,16 +37,6 @@ public class MaticarPanel extends SuperPanel {
         configureDeleteBtn();
     }
 
-    private void configureInput(JTextField textField, String label) {
-        JLabel txtFieldLabel = new JLabel();
-        txtFieldLabel.setText(label);
-        panel.add(txtFieldLabel);
-
-        textField.setFont(new Font("Arial", Font.BOLD, 24));
-        textField.setPreferredSize(new Dimension(400, 24));
-        panel.add(textField);
-    }
-
     private void configureAddBtn() {
         addBtn.setText("Dodaj Maticara");
         addBtn.addActionListener(e -> {

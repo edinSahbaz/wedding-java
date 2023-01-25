@@ -1,6 +1,6 @@
 package Models;
 
-public class Lokacija {
+public class Lokacija implements IDataModel {
     private int id;
     private Tema tema;
     private Sala sala;

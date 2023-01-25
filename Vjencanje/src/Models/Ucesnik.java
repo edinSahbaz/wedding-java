@@ -1,6 +1,6 @@
 package Models;
 
-public class Ucesnik {
+public abstract class Ucesnik {
     private int id;
     private String ime;
     private String prezime;

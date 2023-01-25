@@ -1,6 +1,6 @@
 package Models;
 
-public class Catering {
+public class Catering implements IDataModel {
     private int id;
     private String nazivSluzbe;
     private Paket paketUsluge;

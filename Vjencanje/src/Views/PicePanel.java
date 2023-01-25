@@ -25,35 +25,15 @@ public class PicePanel extends SuperPanel {
         super("Pice");
         this.piceTable = vjencanjeData.getPiceTable();
 
-        configureNameInput();
+        configureInput(nameTxtFiled, "Naziv");
         configureAddBtn();
         panel.add(new JSeparator());
         configureShowBtn();
         panel.add(new JSeparator());
-        configureIdInput();
+        configureInput(idTxtFiled, "Id");
         configureGetByIdBtn();
         configureUpdateBtn();
         configureDeleteBtn();
-    }
-
-    private void configureNameInput() {
-        JLabel txtFieldLabel = new JLabel();
-        txtFieldLabel.setText("Naziv");
-        panel.add(txtFieldLabel);
-
-        nameTxtFiled.setFont(new Font("Arial", Font.BOLD, 24));
-        nameTxtFiled.setPreferredSize(new Dimension(400, 24));
-        panel.add(nameTxtFiled);
-    }
-
-    private void configureIdInput() {
-        JLabel txtFieldLabel = new JLabel();
-        txtFieldLabel.setText("Id");
-        panel.add(txtFieldLabel);
-
-        idTxtFiled.setFont(new Font("Arial", Font.BOLD, 24));
-        idTxtFiled.setPreferredSize(new Dimension(400, 24));
-        panel.add(idTxtFiled);
     }
 
     private void configureAddBtn() {

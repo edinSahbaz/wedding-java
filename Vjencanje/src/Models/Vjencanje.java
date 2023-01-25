@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-public class Vjencanje {
+public class Vjencanje implements IDataModel {
     private int id;
     private Date termin;
     private Lokacija lokacija;

@@ -24,116 +24,85 @@ public class FotografPanel extends SuperPanel {
         super("Fotograf");
         this.fotografTable = vjencanjeData.getFotografTable();
 
+        configureElements();
+    }
+
+    private void configureElements() {
         configureInput(nameTxtFiled, "Ime");
         configureInput(surnameTxtFiled, "Prezime");
         configureInput(priceTxtFiled, "Cijena");
-        configureAddBtn();
+        configureBtn(addBtn, "Dodaj Fotografa", this::insert);
         panel.add(new JSeparator());
-        configureShowBtn();
+        configureBtn(showAllBtn, "Prikazi Fotografe", this::selectAll);
         panel.add(new JSeparator());
         configureInput(idTxtFiled, "Id");
-        configureGetByIdBtn();
-        configureUpdateBtn();
-        configureDeleteBtn();
+        configureBtn(getByIdBtn, "Prikazi Fotografa za uneseni ID", this::selectById);
+        configureBtn(updateBtn, "Update Fotografa za uneseni ID", this::update);
+        configureBtn(deleteBtn, "Obrisi Fotografa za uneseni ID", this::delete);
     }
 
-    private void configureInput(JTextField textField, String label) {
-        JLabel txtFieldLabel = new JLabel();
-        txtFieldLabel.setText(label);
-        panel.add(txtFieldLabel);
+    private void insert() {
+        String name = nameTxtFiled.getText();
+        String surname = surnameTxtFiled.getText();
+        float price = Float.parseFloat(priceTxtFiled.getText());
 
-        textField.setFont(new Font("Arial", Font.BOLD, 24));
-        textField.setPreferredSize(new Dimension(400, 24));
-        panel.add(textField);
+        if(name.length() < 1 || surname.length() < 1) {
+            JOptionPane.showMessageDialog(panel, "Pogrešni parametri!");
+        } else {
+            int id = fotografTable.getNewId();
+            Fotograf newFotograf = new Fotograf(id, name, surname, price);
+            fotografTable.insert(newFotograf);
+        }
     }
 
-    private void configureAddBtn() {
-        addBtn.setText("Dodaj Fotografa");
-        addBtn.addActionListener(e -> {
-            String name = nameTxtFiled.getText();
-            String surname = surnameTxtFiled.getText();
-            float price = Float.parseFloat(priceTxtFiled.getText());
+    private void selectAll() {
+        LinkedHashMap<Integer, Fotograf> returnData = fotografTable.selectAll();
 
-            if(name.length() < 1 || surname.length() < 1) {
-                JOptionPane.showMessageDialog(panel, "Pogrešni parametri!");
-            } else {
-                int id = fotografTable.getNewId();
-                Fotograf newFotograf = new Fotograf(id, name, surname, price);
-                fotografTable.insert(newFotograf);
-            }
-        });
+        String output = "";
 
-        panel.add(addBtn);
+        for (int id : returnData.keySet()) {
+            Fotograf temp = returnData.get(id);
+            output += temp.toString() + "\n";
+        }
+
+        JOptionPane.showMessageDialog(panel, output);
     }
 
-    private void configureShowBtn() {
-        showAllBtn.setText("Prikazi Fotografe");
-        showAllBtn.addActionListener(e -> {
-            LinkedHashMap<Integer, Fotograf> returnData = fotografTable.selectAll();
+    private void delete() {
+        int id = Integer.parseInt(idTxtFiled.getText());
 
-            String output = "";
-
-            for (int id : returnData.keySet()) {
-                Fotograf temp = returnData.get(id);
-                output += temp.toString() + "\n";
-            }
-
-            JOptionPane.showMessageDialog(panel, output);
-        });
-
-        panel.add(showAllBtn);
+        if(fotografTable.selectById(id) == null) {
+            JOptionPane.showMessageDialog(panel, "Zapis ne postoji!");
+        } else {
+            fotografTable.delete(id);
+        }
     }
 
-    private void configureDeleteBtn() {
-        deleteBtn.setText("Obrisi Fotografa za uneseni ID");
-        deleteBtn.addActionListener(e -> {
-            int id = Integer.parseInt(idTxtFiled.getText());
+    private void update() {
+        String name = nameTxtFiled.getText();
+        String surname = surnameTxtFiled.getText();
+        float price = Float.parseFloat(priceTxtFiled.getText());
+        int id = Integer.parseInt(idTxtFiled.getText());
 
-            if(fotografTable.selectById(id) == null) {
-                JOptionPane.showMessageDialog(panel, "Zapis ne postoji!");
-            } else {
-                fotografTable.delete(id);
-            }
-        });
-
-        panel.add(deleteBtn);
+        if(name.length() < 1 || surname.length() < 1 || fotografTable.selectById(id) == null) {
+            JOptionPane.showMessageDialog(panel, "Pogrešan parametar!");
+        } else {
+            Fotograf newFotograf = new Fotograf(id, name, surname, price);
+            fotografTable.update(id, newFotograf);
+        }
     }
 
-    private void configureUpdateBtn() {
-        updateBtn.setText("Update Fotografa za uneseni ID");
-        updateBtn.addActionListener(e -> {
-            String name = nameTxtFiled.getText();
-            String surname = surnameTxtFiled.getText();
-            float price = Float.parseFloat(priceTxtFiled.getText());
-            int id = Integer.parseInt(idTxtFiled.getText());
+    private void selectById() {
+        int id = Integer.parseInt(idTxtFiled.getText());
+        Fotograf returnData = fotografTable.selectById(id);
+        String output = "";
 
-            if(name.length() < 1 || surname.length() < 1 || fotografTable.selectById(id) == null) {
-                JOptionPane.showMessageDialog(panel, "Pogrešan parametar!");
-            } else {
-                Fotograf newFotograf = new Fotograf(id, name, surname, price);
-                fotografTable.update(id, newFotograf);
-            }
-        });
+        if(returnData == null) {
+            output = "Pogrešan id!";
+        } else {
+            output = returnData.toString();
+        }
 
-        panel.add(updateBtn);
-    }
-
-    private void configureGetByIdBtn() {
-        getByIdBtn.setText("Prikazi Fotografa za uneseni ID");
-        getByIdBtn.addActionListener(e -> {
-            int id = Integer.parseInt(idTxtFiled.getText());
-            Fotograf returnData = fotografTable.selectById(id);
-            String output = "";
-
-            if(returnData == null) {
-                output = "Pogrešan id!";
-            } else {
-                output = returnData.toString();
-            }
-
-            JOptionPane.showMessageDialog(panel, output);
-        });
-
-        panel.add(getByIdBtn);
+        JOptionPane.showMessageDialog(panel, output);
     }
 }

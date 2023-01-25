@@ -4,7 +4,7 @@ import Helpers.DateHelper;
 
 import java.util.Date;
 
-public class Racun {
+public class Racun implements IDataModel {
     private int id;
     private Vjencanje vjencanje;
     private float iznos;

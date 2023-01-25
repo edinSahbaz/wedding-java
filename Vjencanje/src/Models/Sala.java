@@ -1,6 +1,6 @@
 package Models;
 
-public class Sala {
+public class Sala implements IDataModel {
     private int id;
     private String adresa;
     private int kapacitet;

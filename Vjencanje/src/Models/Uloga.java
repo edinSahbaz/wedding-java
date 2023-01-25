@@ -1,6 +1,6 @@
 package Models;
 
-public class Uloga {
+public class Uloga implements IDataModel {
     private int id;
     private String naziv;
 
